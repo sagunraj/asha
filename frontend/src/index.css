@@ -1,18 +1,132 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-apple-gray text-apple-text font-sans
+           dark:bg-black dark:text-[#F5F5F7];
+  }
+
+  input, select, textarea {
+    @apply font-sans;
+  }
+
+  /* Native select option background in dark mode */
+  option {
+    @apply dark:bg-[#2C2C2E] dark:text-[#F5F5F7];
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  /* ── Buttons ─────────────────────────────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-apple-blue text-white text-sm font-medium rounded-xl
+           hover:bg-apple-blue-dark active:scale-95 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-white text-apple-text text-sm font-medium rounded-xl border border-apple-border
+           hover:bg-apple-gray active:scale-95 transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-apple-red text-white text-sm font-medium rounded-xl
+           hover:bg-red-600 active:scale-95 transition-all duration-150;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 text-apple-blue text-sm font-medium rounded-lg
+           hover:bg-blue-50 active:scale-95 transition-all duration-150;
+  }
+
+  /* ── Card ────────────────────────────────────────────────── */
+  .card {
+    @apply bg-white rounded-2xl shadow-card p-6;
+  }
+
+  /* ── Input ───────────────────────────────────────────────── */
+  .input {
+    @apply w-full px-4 py-2.5 rounded-xl border border-apple-border bg-white text-apple-text text-sm
+           placeholder:text-apple-secondary
+           focus:outline-none focus:ring-2 focus:ring-apple-blue/25 focus:border-apple-blue
+           transition-all duration-150;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-apple-text mb-1.5;
+  }
+
+  /* ── Badge ───────────────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-green  { @apply badge bg-green-50  text-green-700; }
+  .badge-red    { @apply badge bg-red-50    text-red-700; }
+  .badge-yellow { @apply badge bg-yellow-50 text-yellow-700; }
+  .badge-gray   { @apply badge bg-gray-100  text-gray-600; }
+  .badge-blue   { @apply badge bg-blue-50   text-blue-700; }
+
+  /* ── Table ───────────────────────────────────────────────── */
+  .table-wrap {
+    @apply overflow-x-auto rounded-2xl border border-apple-border/60;
+  }
+
+  .data-table {
+    @apply w-full text-sm;
+  }
+
+  .data-table thead tr {
+    @apply border-b border-apple-border/60 bg-apple-gray/60;
+  }
+
+  .data-table thead th {
+    @apply text-left px-4 py-3 text-xs font-semibold text-apple-secondary uppercase tracking-wide;
+  }
+
+  .data-table tbody tr {
+    @apply border-b border-apple-border/40 hover:bg-apple-gray/40 transition-colors;
+  }
+
+  .data-table tbody td {
+    @apply px-4 py-3 text-apple-text;
+  }
+
+  /* ── Modal ───────────────────────────────────────────────── */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in;
+  }
+
+  .modal-box {
+    @apply bg-white rounded-3xl shadow-modal w-full max-w-lg max-h-[90vh] overflow-y-auto animate-slide-up;
+  }
+
+  /* ── Stat card ───────────────────────────────────────────── */
+  .stat-card {
+    @apply card flex flex-col gap-1;
+  }
+
+  .stat-label {
+    @apply text-sm text-apple-secondary font-medium;
+  }
+
+  .stat-value {
+    @apply text-3xl font-semibold text-apple-text tracking-tight;
+  }
+
+  .stat-sub {
+    @apply text-sm text-apple-secondary mt-1;
+  }
 }
 
-.App {
-  text-align: center;
-  padding: 2rem;
-}
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #D2D2D7; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #B0B0B8; }
